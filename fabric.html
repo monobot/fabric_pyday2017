@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Fabric - Brief introduction</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section>
+                    <h2><a href="http://www.fabfile.org/">Fabric</a></h2>
+                    <h4>"Brief introduction"</h4>
+                    <p class="fragment">
+                        <small>About me <a href="http://monobotsoft.es">Héctor Alvarez</a> / <a href="https://twitter.com/monobotblog">@monobotblog</a> / <a href="mailto:monobot.soft@gmail.com">monobot.soft@gmail.com</a></small>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>
+                        <img height="90" style="vertical-align: middle" data-src="http://docs.fabfile.org/en/1.13/_static/logo.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+                        Fabric
+                    </h3>
+                    <ul>
+                        <p class="fragment"><small>Fabric is a high level interface for the command line</small></p>
+                        <p class="fragment"><small>Allows both the execution of commands in local and remote, in one or several servers.<span class="fragment"> Before you ask, <b>yes</b> integrates perfectly with <b>ssh</b></span></small></p>
+                        <p class="fragment"><small>Due to these characteristics, makes it very versatile on executing long commands, packs of commands, maintenance tasks, deployments, etc...</small></p>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Why <b>Python</b> instead of <b>bash</b> directly?</h3>
+                    <ul>
+                        <p class="fragment"><small>You can create the scripts with only a few lines of code and obviouslly wayf more legible than with bash.</small></p>
+                        <p class="fragment"><small>Less prone to errors than hand typing, less boring too if you ask me.</span></small></p>
+                        <p class="fragment"><small>The same stack of commands can be run on different servers.</small></p>
+                    </ul>
+                </section>
+
+                <section>
+                    <a href="http://www.fabfile.org/installing.html"><h3>installation</h3></a>
+                    <ul>
+                        <div class="fragment">
+                            <p>Directly with <a href="https://pypi.python.org/pypi/pip">pip</a></p>
+                            <pre><code class="hljs" data-trim contenteditable>
+$ pip install fabric
+                            </code></pre>
+                        </div>
+                        <div class="fragment">
+                            <p>Or with repositories (Ubuntu example)</p>
+                            <pre><code class="hljs" data-trim contenteditable>
+$ sudo apt-get install fabric
+                            </code></pre>
+                        </div>
+                    </ul>
+                </section>
+
+                <section data-background="#FFFFB1">
+                    <section>
+                    <h3>Lets see code!!</h3>
+                    <p>In any fabric file you will define some enviroment variables and some functions.</p>
+                    <p class="fragment">simple example:</p>
+                    </section>
+                    <section>
+                        <p><small>
+                            <pre><code class="hljs" data-trim contenteditable>
+# -*- coding: utf-8 -*-
+from fabric.api import run, env
+from datetime import date
+
+from os import path
+today = date.today()
+
+env.user = 'user'
+env.hosts = ['9.9.9.9', '99.99.99.99', ]
+env.key_filename = 'key.pem'
+env.DB_ENDPOINT = 'eu-west-1.rds.amazonaws.com'
+env.DB_NAME = 'development'
+
+def get_filepath():
+    filename = '{date}.sql'.format(date=today.strftime('%Y%m%d'))
+    return path.join('/', 'home', 'user', 'dbBackUp', '01daily', filename)
+
+def db_backup():
+    run('/usr/pgsql-9.5/bin/pg_dump -U dbuser -h {EP} {NM} > {fp}'
+        .format(
+            EP=env.DB_ENDPOINT,
+            NM=env.DB_NAME,
+            fp=get_filepath(),
+            )
+        )
+                            </li>
+                        </code></pre>
+                        </small></p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>API</h3>
+                        <p><small>There are many fabric commands, for complete reference see the <a href="http://docs.fabfile.org/en/1.13/api/contrib/files.html">documentation</a></small></p>
+                        <p class="fragment"><small>The most used commands are:</small></p>
+                    </section>
+
+                    <section>
+                        <h4>local</h4>
+                        <p>run commands on your local machine</p>
+                    </section>
+
+                    <section>
+                        <h4>run</h4>
+                        <p>run commands on remote machines</p>
+                        <p><small>* requires to know on what machine you will run the commands.</small></p>
+                        <p><small>* requires a password.</small></p>
+                    </section>
+
+                    <section>
+                        <h4>sudo</h4>
+                        <p>Run the commands with superuser privileges</p>
+                        <p><small>* requires a password</small></p>
+                        <p><small>* works only remote</small></p>
+                    </section>
+
+                    <section>
+                        <h4>cd</h4>
+                        <p>Run the commands on specific directory</p>
+                    </section>
+
+                    <section>
+                        <h4>get</h4>
+                        <p>Copies remote files locally</p>
+                    </section>
+
+                    <section>
+                        <h4>put</h4>
+                        <p>copies local files to remote computer</p>
+                    </section>
+                </section>
+
+                <section data-background="#FFFFB1">
+                    <section>
+                        <h4>Such a boring person, so much talking and no code anywhere!!!</h4>
+                        <p class="fragment">You are right, how to work with those commands?</p>
+                    </section>
+
+                    <section>
+                        <h4>lets see local, run and cd in action</h4>
+                        <p><b>cd</b> works inside a <b>with</b> statemen, that is a confortable wrapper that allows the commands be executed in that specific directory.</b></p>
+                    </section>
+
+                    <section>
+                        <p>
+                            <pre><code class="hljs" data-trim contenteditable>
+from fabric.api import local, run, cd
+
+def archive(foldername, filename):
+    # we will see a more elegant way of doing this later
+    verb = run
+    if self.server_name == 'localhost':
+        verb = local
+
+    with cd('/home/monobot/sync/{foldername}'.format(foldername=foldername)):
+        verb('mv {filename} archived/ -rf')
+                            </code></pre>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4>Wait a moment, there are arguments in that function, How is that?</h4>
+                        <p>Yes, we can pass arguments from the command line, like so:</p>
+                            <pre><code class="hljs" data-trim contenteditable>
+$ fab archive:downloads,myfile.zip
+                            </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>env</h3>
+                        <p><small>Its a class that inherits from dict</small></p>
+                        <p><small>In env is where you define the enviromental variables and where you configure some specific behaviours of fabric</small></p>
+                        <p><small>There are many <b>env variables</b> and its encouraged to take a look to the <a href="http://docs.fabfile.org/en/1.13/usage/env.html">complete list</a></small></p>
+                        <p><small>env also works as storage and access to our specific developing requirements.</small></p>
+                        <p class="fragment"><small>The most important env enviromental variables are:</small></p>
+                    </section>
+
+                    <section>
+                        <h4>user / sudo_user</h4>
+                        <ul>
+                        <p>user</p>
+                        <p><small>Where you define what user will run the command, fallbacks to the user that run the fabric script.</small></p>
+                        <div class="fragment">
+                        <p>sudo_user</p>
+                        <p><small>As you guessed the name of the sudo username (will be read by the sudo command).</small></p>
+                        </div>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h4>host / hosts</h4>
+                        <ul>
+                            <p>host</p>
+                            <p><small>Where the remote command will be run (run command).</small></p>
+                            <div  class="fragment"><p>hosts</p>
+                            <p><small>Its a list of remote computers where the run command will be executed.</small></p></div>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h4>password / passwords</h4>
+                        <ul>
+                            <p>password</p>
+                            <p><small>Where you store the password of the user that will run the command.</small></p>
+                            <div class="fragment"><p>passwords</p>
+                            <p><small>If each remote computer requires an specific username/password you can make use of this enviromental variable.</small></p></div>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h4>sudo_password / sudo_passwords</h4>
+                        <ul>
+                            <p>sudo_password</p>
+                            <p><small>If that variable does not exist will fallback to password.</small></p>
+                            <div class="fragment"><p>sudo_passwords</p>
+                            <p><small>Needed if each of the servers needs specific password and user.</small></p></div>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h4>shell</h4>
+                        <ul>
+                            <p><small>To define the shell we want to use defaults to <b>bash</b>.</small></p>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h4>At some specific point you could preefer to change an env variable inside an specific task</h4>
+                        <p class="fragment"></p>
+                            <pre><code class="hljs" data-trim contenteditable>
+from fabric.api import settings, run
+
+def changing_inside(path):
+    with settings(warn_only=True):
+        return run('ls -la')
+                            </code></pre>
+                        </p>
+                        <p>That warn_only will override the content of env.warn_only inside the <b>with</b> statement</p>
+                    </section>
+                </section>
+
+                <section data-background="#FFFFB1">
+                    <section>
+                        <h4>Come on Héctor, show us some code!!!</h4>
+                        <div class="fragment">
+                            <h4>Roger! How to manage different configurations:</h4>
+                            <p><small>Usually the different configurations are managed manipulating the env dictionary on run time.</small></p>
+                            <p><small>eg:</small></p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <p>
+                            <pre><code class="hljs" data-trim contenteditable>
+from fabric.api import env, run, local
+
+def localhost():
+    env.run = local
+    env.DB_ENDPOINT = 'eu-west-1.rds.amazonaws.com'
+    env.DB_NAME = 'development'
+
+def testing():
+    hosts = ['8.8.8.8']
+
+    env.run = run
+    env.DB_ENDPOINT = 'eu-west-2.rds.amazonaws.com'
+    env.DB_NAME = 'testing'
+                            </li>
+                        </code></pre>
+                        </p>
+                    </section>
+
+                    <section>
+                        <p><small>So we can change the env at runtime:</small></p>
+                        <p class="fragment">
+                            <pre><code class="hljs" data-trim contenteditable>
+$ fab -f mi_fabfile.py development db_backup
+                            </li>
+                            </code></pre>
+                            <pre><code class="hljs" data-trim contenteditable>
+$ fab -f mi_fabfile.py testing db_backup
+                            </li>
+                            </code></pre>
+                        </p>
+                    </section>
+
+                </section>
+
+                <section>
+                    <section>
+                        <h3>How to run fabric</h3>
+                        <p>Fabric will allways look for a <b>fabfile.py</b> file in your current folder, if that doesn't exist you will have to specify what file you want to run specifically.</p>
+                        <p class="fragment">
+                            <pre><code class="hljs" data-trim contenteditable>
+$ fab development db_backup
+                            </code></pre>
+                            <pre><code class="hljs" data-trim contenteditable>
+$ fab -f mi_fabfile.py development db_backup
+                            </code></pre>
+                        </p>
+                        <p class="fragment">
+                            Usually i like it more the second, but i will soon explain the power of the former
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>How to send arguments or keyword arguments</h3>
+                        <p>Like with regular python you can send arguments and keyword arguments, but using the command line</p>
+                        <p class="fragment">
+                            <pre><code class="hljs" data-trim contenteditable>
+$ fab big_task:first_arg,second_arg,third=foo,fourth=bar
+                            </code></pre>
+                        </p>
+                        <p>As you can see only accepts string arguments, you could transform them inside</p>
+                    </section>
+
+                    <section>
+                        <p><small>BTW nothing stops you of doing:</small></p>
+                        <p class="fragment">
+                            <pre><code class="hljs" data-trim contenteditable>
+$ fab -f mi_fabfile.py development db_backup production db_backup
+                            </li>
+                            </code></pre>
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>tasks</h3>
+                        <p>From inside the fabfiles you can specify what functions are the tasks and which ones arent</p>
+                        <p>This is something relativelly new to fabric, so for backwards compatibility its not required to mark them that is all functions are considered tasks, but if you use task inside a file those that are not marked arent considered tasks any more.</p>
+                        <p>You can mark functions using the handy task decorator</p>
+                    </section>
+
+                    <section>
+                        <p>
+                            <h4>OMG!, can you show some code without asking for it?</h4>
+                            <pre><code class="hljs" data-trim contenteditable>
+from fabric.decorators import task
+
+@task
+def foo():
+    run('foo')
+
+@task(alias='bar')
+def my_bar():
+    run('bar')
+                            </code></pre>
+                        </p>
+                    </section>
+
+                    <section>
+                        <p>
+                            <h4>Tasks can also be defined as classes that inherit from Task</h4>
+                            <p>IMHO its a bit of overkill, what makes fabric nice is been simple. But guess some people can make good use of it.</p>
+                            <pre><code class="hljs" data-trim contenteditable>
+from fabric.api import run
+from fabric.tasks import Task
+
+def MyFooTask(Task):
+    name = 'foo'
+    def run(self):
+        run('foo')
+
+# with arguments
+def MyBarTask(Task):
+    name = 'foo'
+    def run(self, first, second, third='foo'):
+        run('foo')
+                            </code></pre>
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>Last but not least</h3>
+                        <p>How to make a fabric complete module</p>
+                        <p>you can create an structure like this:</p>
+                    </section>
+                    <section>
+                        <p>
+                            <pre><code class="hljs" data-trim contenteditable>
+fabfile/
+    ├── __init__.py
+    |   from configuration import inv, development, localhost, production
+    |   from foo import foo_task
+    |   from bar import bar_task
+    |
+    ├── configuration.py
+    |   @task
+    |   def localhost():
+    |       inv.hosts = []
+    |   @task
+    |   def development():
+    |       inv.hosts = []
+    |   @task
+    |   def production():
+    |       inv.hosts = []
+    |
+    ├── foo.py
+    |   @task
+    |   def foo_bar():
+    |
+    └── bar.py
+        @task
+        def foo_bar():
+
+                            </code></pre>
+                        </p>
+                    </section>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                transition: 'concave', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+        </script>
+
+    </body>
+</html>
