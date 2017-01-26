@@ -397,16 +397,12 @@ def my_bar():
 from fabric.api import run
 from fabric.tasks import Task
 
-def MyFooTask(Task):
-    name = 'foo'
-    def run(self):
-        run('foo')
+class MyTask(Task):
+    name = "my task"
+    def run(self, environment, domain="whatever.com"):
+        run("foo")
 
-# with arguments
-def MyBarTask(Task):
-    name = 'foo'
-    def run(self, first, second, third='foo'):
-        run('foo')
+instance = MyTask()
                             </code></pre>
                         </p>
                     </section>
@@ -419,7 +415,7 @@ def MyBarTask(Task):
                         <p>you can create an structure like this:</p>
                     </section>
                     <section>
-                        <p>
+                        <p><small>
                             <pre><code class="hljs" data-trim contenteditable>
 fabfile/
     ├── __init__.py
@@ -447,7 +443,7 @@ fabfile/
         def foo_bar():
 
                             </code></pre>
-                        </p>
+                        </small></p>
                     </section>
                 </section>
 
