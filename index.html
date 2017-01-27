@@ -54,6 +54,7 @@
                     <ul>
                         <p class="fragment"><small>Fabric is a high level interface for the command line</small></p>
                         <p class="fragment"><small>Allows both the execution of commands in local and remote, in one or several servers.<span class="fragment"> Before you ask, <b>yes</b> integrates perfectly with <b>ssh</b></span></small></p>
+                        <p>To do so if you have ssh to <a href="https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files">connect without verification</a>, then fabric will not ask either</p>
                         <p class="fragment"><small>Due to these characteristics, makes it very versatile on executing long commands, packs of commands, maintenance tasks, deployments, etc...</small></p>
                     </ul>
                 </section>
@@ -61,8 +62,8 @@
                 <section>
                     <h3>Why <b>Python</b> instead of <b>bash</b> directly?</h3>
                     <ul>
-                        <p class="fragment"><small>You can create the scripts with only a few lines of code and obviouslly wayf more legible than with bash.</small></p>
-                        <p class="fragment"><small>Less prone to errors than hand typing, less boring too if you ask me.</span></small></p>
+                        <p class="fragment"><small>You can create the scripts with only a few lines of code and obviouslly more legible than with bash.</small></p>
+                        <p class="fragment"><small>Less prone to errors than hand typing and less boring too if you ask me.</span></small></p>
                         <p class="fragment"><small>The same stack of commands can be run on different servers.</small></p>
                     </ul>
                 </section>
@@ -189,7 +190,10 @@ def archive(foldername, filename):
     if self.server_name == 'localhost':
         verb = local
 
-    with cd('/home/monobot/sync/{foldername}'.format(foldername=foldername)):
+    working_dir = '/home/monobot/sync/{foldername}'.format(
+        foldername=foldername
+    )
+    with cd(working_dir):
         verb('mv {filename} archived/ -rf')
                             </code></pre>
                         </p>
@@ -208,10 +212,11 @@ $ fab archive:downloads,myfile.zip
                     <section>
                         <h3>env</h3>
                         <p><small>Its a class that inherits from dict</small></p>
-                        <p><small>In env is where you define the enviromental variables and where you configure some specific behaviours of fabric</small></p>
+                        <p><small><b>env</b> will be accessed by fabric to check its configuration</small></p>
+                        <p><small>So there is where you define the enviromental variables and where you configure some specific behaviours of fabric</small></p>
                         <p><small>There are many <b>env variables</b> and its encouraged to take a look to the <a href="http://docs.fabfile.org/en/1.13/usage/env.html">complete list</a></small></p>
-                        <p><small>env also works as storage and access to our specific developing requirements.</small></p>
-                        <p class="fragment"><small>The most important env enviromental variables are:</small></p>
+                        <p><small><b>env</b> also works as storage and access to our specific developing requirements.</small></p>
+                        <p class="fragment"><small>The most important <b>env</b> enviromental variables are:</small></p>
                     </section>
 
                     <section>
@@ -263,7 +268,7 @@ $ fab archive:downloads,myfile.zip
                         </ul>
                     </section>
 
-                    <section>
+                    <section data-background="#FFFFB1">
                         <h4>At some specific point you could preefer to change an env variable inside an specific task</h4>
                         <p class="fragment"></p>
                             <pre><code class="hljs" data-trim contenteditable>
@@ -292,6 +297,9 @@ def changing_inside(path):
                         <p>
                             <pre><code class="hljs" data-trim contenteditable>
 from fabric.api import env, run, local
+
+env.user = 'user'
+env.foo = 'bar'
 
 def localhost():
     env.run = local
@@ -368,7 +376,7 @@ $ fab -f mi_fabfile.py development db_backup production db_backup
                     <section>
                         <h3>tasks</h3>
                         <p>From inside the fabfiles you can specify what functions are the tasks and which ones arent</p>
-                        <p>This is something relativelly new to fabric, so for backwards compatibility its not required to mark them that is all functions are considered tasks, but if you use task inside a file those that are not marked arent considered tasks any more.</p>
+                        <p>This is something relativelly new to fabric, so for backwards compatibility its not required to mark them, that is all functions are considered tasks, but if you use task inside a file those that are not marked arent considered tasks any more.</p>
                         <p>You can mark functions using the handy task decorator</p>
                     </section>
 
@@ -445,6 +453,11 @@ fabfile/
                             </code></pre>
                         </small></p>
                     </section>
+                </section>
+
+                <section>
+                    <h3>Thanks!</h3>
+                    <p>The complete slides will be always available at <a href="https://monobot.github.io/fabric_pyday2017/">github</a></p>
                 </section>
 
             </div>
