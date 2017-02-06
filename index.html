@@ -41,9 +41,13 @@
                 <section>
                     <h2><a href="http://www.fabfile.org/">Fabric</a></h2>
                     <h4>"Brief introduction"</h4>
-                    <p class="fragment">
-                        <small>About me <a href="http://monobotsoft.es">Héctor Alvarez</a> / <a href="https://twitter.com/monobotblog">@monobotblog</a> / <a href="mailto:monobot.soft@gmail.com">monobot.soft@gmail.com</a></small>
-                    </p>
+                </section>
+
+                <section>
+                    <p>About Me: <a href="http://monobotsoft.es">Héctor Alvarez</a></p>
+                    <small><p>twitter: <a href="https://twitter.com/monobotblog">@monobotblog</a></p></small>
+                    <small><p>email: <a href="mailto:monobot.soft@gmail.com">monobot.soft@gmail.com</a></p></small>
+                    <small>Backend developer at <a href="https://cabaana.com/" target="_blank">cabaana</a></small>
                 </section>
 
                 <section>
@@ -53,8 +57,10 @@
                     </h3>
                     <ul>
                         <p class="fragment"><small>Fabric is a high level interface for the command line</small></p>
-                        <p class="fragment"><small>Allows both the execution of commands in local and remote, in one or several servers.<span class="fragment"> Before you ask, <b>yes</b> integrates perfectly with <b>ssh</b></span></small></p>
-                        <p>To do so if you have ssh to <a href="https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files">connect without verification</a>, then fabric will not ask either</p>
+                        <div class="fragment">
+                            <p><small>Allows both the execution of commands in local and remote, in one or several servers.<span class="fragment"> Before you ask, <b>yes</b> integrates perfectly with <b>ssh</b></span></small></p>
+                            <p><span class="fragment"><small>To do so if you have ssh to <a href="https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files">connect without verification</a>, then fabric will not ask either</small></span></p>
+                        </div>
                         <p class="fragment"><small>Due to these characteristics, makes it very versatile on executing long commands, packs of commands, maintenance tasks, deployments, etc...</small></p>
                     </ul>
                 </section>
@@ -104,7 +110,6 @@ today = date.today()
 
 env.user = 'user'
 env.hosts = ['9.9.9.9', '99.99.99.99', ]
-env.key_filename = 'key.pem'
 env.DB_ENDPOINT = 'eu-west-1.rds.amazonaws.com'
 env.DB_NAME = 'development'
 
