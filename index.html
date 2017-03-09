@@ -40,14 +40,14 @@
 
                 <section>
                     <h2><a href="http://www.fabfile.org/">Fabric</a></h2>
-                    <h4>"Brief introduction"</h4>
+                    <h4>"Breve introducción"</h4>
                 </section>
 
                 <section>
-                    <p>About Me: <a href="http://monobotsoft.es">Héctor Alvarez</a></p>
+                    <p>Sobre mi: <a href="http://monobotsoft.es">Héctor Alvarez</a></p>
                     <small><p>twitter: <a href="https://twitter.com/monobotblog">@monobotblog</a></p></small>
                     <small><p>email: <a href="mailto:monobot.soft@gmail.com">monobot.soft@gmail.com</a></p></small>
-                    <small>Backend developer at <a href="https://cabaana.com/" target="_blank">cabaana</a></small>
+                    <small>Backend developer en <a href="https://cabaana.com/" target="_blank">cabaana</a></small>
                 </section>
 
                 <section>
@@ -56,46 +56,59 @@
                         Fabric
                     </h3>
                     <ul>
-                        <p class="fragment"><small>Fabric is a high level interface for the command line</small></p>
+                        <p class="fragment"><small>Fabric es un framework de alto nivel para la línea de comandos</small></p>
                         <div class="fragment">
-                            <p><small>Allows both the execution of commands in local and remote, in one or several servers.<span class="fragment"> Before you ask, <b>yes</b> integrates perfectly with <b>ssh</b></span></small></p>
-                            <p><span class="fragment"><small>To do so if you have ssh to <a href="https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files">connect without verification</a>, then fabric will not ask either</small></span></p>
+                            <p><small>Permite tanto la ejecución de comandos en local como en remoto, en uno o varios servidores.<span class="fragment"> Antes de que lo pregunten, <b>SI</b> se integra perfectamente con <b>ssh</b></span></small></p>
+                            <p><span class="fragment"><small>Para ello necesitas tener ssh configurado de tal forma que <a href="https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files">se conecte sin verificación</a>, así fabric no tiene que preguntar por credenciales</small></span></p>
                         </div>
-                        <p class="fragment"><small>Due to these characteristics, makes it very versatile on executing long commands, packs of commands, maintenance tasks, deployments, etc...</small></p>
+                        <p class="fragment"><small>Debido a éstas características, lo hace muy sencillo y versátil para ejecutar comandos largos, grupos de comandos, tareas de mantenimiento, despliegues, etc...</small></p>
                     </ul>
                 </section>
 
                 <section>
-                    <h3>Why <b>Python</b> instead of <b>bash</b> directly?</h3>
+                    <h3>¿Porqué en <b>Python</b> en vez de <b>bash</b> directamente?</h3>
+                    <img  class="fragment" style="vertical-align: middle;border:none;box-shadow:none;background:none" src="lib/images/bash_mess.png" alt="why automate" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+                </section>
+                <section>
                     <ul>
-                        <p class="fragment"><small>You can create the scripts with only a few lines of code and obviouslly more legible than with bash.</small></p>
-                        <p class="fragment"><small>Less prone to errors than hand typing and less boring too if you ask me.</span></small></p>
-                        <p class="fragment"><small>The same stack of commands can be run on different servers.</small></p>
+                        <p><small>Con Python puedes crear scripts con solo unas pocas líneas de código, y obviamente mucho mas legible.</small></p>
+                        <p class="fragment"><small>Además tener un script es menos dado a errores que escribirlo a mano, y menos aburrido (y estresante) si me preguntas.</span></small></p>
+                        <p class="fragment"><small>Al ser python tienes acceso a cientos de paquetes que te hacen la vida más fácil (como logging, os, etc...).</span></small></p>
+                        <p class="fragment"><small>El mismo grupo de comandos puede ejecutarse en un grupo de servidores.</small></p>
+                        <p class="fragment"><small>Nada te impide incrustarlo en el cron de tu máquina y hacer la tarea automáticamente.</small></p>
+                        <pre class="fragment"><small><code class="hljs" data-trim contenteditable>
+2 0 * * * ec2-user /var/.envs/cabaana/bin/fab -f /srv/django/cabaana/scripts/fab/db_backup.py dev remote_bu
+                        </code></small></pre>
                     </ul>
                 </section>
 
                 <section>
-                    <h3>Why automate?</h3>
+                    <h3>¿Porqué automatizar?</h3>
                     <img style="vertical-align: middle;border:none;box-shadow:none;background:none" src="lib/images/tarea.jpg" alt="why automate" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
                 </section>
 
                 <section>
-                    <a href="http://www.fabfile.org/installing.html"><h3>installation</h3></a>
+                    <h3>Así que ...</h3>
+                    <img style="vertical-align: middle;border:none;box-shadow:none;background:none" src="lib/images/automate.jpg" alt="why automate" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+                </section>
+
+                <section>
+                    <a href="http://www.fabfile.org/installing.html"><h3>Instalación</h3></a>
                     <ul>
                         <div class="fragment">
-                            <p>Directly with <a href="https://pypi.python.org/pypi/pip">pip</a> for python3</p>
+                            <p>Con <a href="https://pypi.python.org/pypi/pip">pip</a> directamente, para python3</p>
                             <pre><code class="hljs" data-trim contenteditable>
 $ pip install fabric3
                             </code></pre>
                         </div>
                         <div class="fragment">
-                            <p>And for for python 2</p>
+                            <p>Y para python2</p>
                             <pre><code class="hljs" data-trim contenteditable>
 $ pip install fabric
                             </code></pre>
                         </div>
                         <div class="fragment">
-                            <p>Or with repositories (Ubuntu example)</p>
+                            <p>O mediante repositorios (por ejemplo en Ubuntu)</p>
                             <pre><code class="hljs" data-trim contenteditable>
 $ sudo apt-get install fabric
                             </code></pre>
@@ -105,9 +118,9 @@ $ sudo apt-get install fabric
 
                 <section data-background="#FFFFB1">
                     <section>
-                    <h3>Lets see code!!</h3>
-                    <p>In any fabric file you will define some enviroment variables and some functions.</p>
-                    <p class="fragment">simple example:</p>
+                    <h3>Veamos código!!</h3>
+                    <p>En fabric se requiere definir variables de entorno (para configurar el script) y funciones (que son las tareas a ejecutar)</p>
+                    <p class="fragment">Ejemplo sencillo:</p>
                     </section>
                     <section>
                         <p><small>
@@ -145,65 +158,68 @@ def db_backup():
                 <section>
                     <section>
                         <h3>API</h3>
-                        <p><small>There are many fabric commands, for complete reference see the <a href="http://docs.fabfile.org/en/1.13/api/contrib/files.html">documentation</a></small></p>
-                        <p class="fragment"><small>The most used commands are:</small></p>
+                        <p><small>hay muchos commandos fabric, para una referencia completa ver <a href="http://docs.fabfile.org/en/1.13/api/contrib/files.html">la documentación</a></small></p>
+                        <p class="fragment"><small>Los más útiles/usados son:</small></p>
                     </section>
 
                     <section>
                         <h4>local</h4>
-                        <p>run commands on your local machine</p>
+                        <p>ejecutar comandos en tu máquina local</p>
                     </section>
 
                     <section>
                         <h4>run</h4>
-                        <p>run commands on remote machines</p>
-                        <p><small>* requires to know on what machine you will run the commands.</small></p>
-                        <p><small>* requires a password.</small></p>
+                        <p>ejecutar comandos en máquinas remotas</p>
+                        <p><small>* requiere saber en qué máquinas se va a ejecutar el comando.</small></p>
+                        <p><small>* requires clave.</small></p>
                     </section>
 
                     <section>
                         <h4>sudo</h4>
-                        <p>Run the commands with superuser privileges</p>
-                        <p><small>* requires a password</small></p>
-                        <p><small>* works only remote</small></p>
+                        <p>Corre el comando con privilegios de superusuario</p>
+                        <p><small>* requiere clave</small></p>
+                        <p><small>* solo para acceso remoto</small></p>
+                        <p><small>* en local simplemente precedes a fabric con sudo de consola y ya lo tienes</small></p>
                     </section>
 
                     <section>
                         <h4>cd / lcd</h4>
-                        <p>Run the commands on specific directory</p>
+                        <p>Ejecuta los siguientes comandos dentro de directorios específicos</p>
                     </section>
 
                     <section>
                         <h4>get</h4>
-                        <p>Copies remote files locally</p>
+                        <p>Copia ficheros remotos en local</p>
                     </section>
 
                     <section>
                         <h4>put</h4>
-                        <p>copies local files to remote computer</p>
+                        <p>Copia ficheros locales en remoto</p>
                     </section>
                 </section>
 
                 <section data-background="#FFFFB1">
                     <section>
-                        <h4>Such a boring person, so much talking and no code anywhere!!!</h4>
-                        <p class="fragment">You are right, how to work with those commands?</p>
+                        <h4>Eres un aburrido, tanto hablar y no vemos código por ningún lado!!!</h4>
+
+                        <img style="vertical-align: middle;border:none;box-shadow:none;background:none" src="lib/images/disculpa.jpg" alt="why automate" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+                        <div class="fragment">
+                        <p>Tienen razón, ¿Cómo trabajaríamos con esos comandos?</p>
+                        </div>
                     </section>
 
                     <section>
-                        <h4>lets see local, run and cd in action</h4>
-                        <p><b>cd</b> works inside a <b>with</b> statement, that is a confortable wrapper that allows the commands be executed in that specific directory.</b></p>
+                        <h4>Veamos local, run y cd en acción</h4>
+                        <p><b>cd</b> se usa dentro de una cláusula <b>with</b>, veamos:</b></p>
                     </section>
 
                     <section>
                         <p>
                             <pre><code class="hljs" data-trim contenteditable>
-from fabric.api import local, run, cd
-
 def archive(foldername, filename):
-    # we will see a more elegant way of doing this later
+    # veremos una forma mas elegante de hacer ésto mas tarde
     verb = run
-    if self.server_name == 'localhost':
+    if server_name == 'localhost':
         verb = local
 
     working_dir = '/home/monobot/sync/{foldername}'.format(
@@ -216,33 +232,34 @@ def archive(foldername, filename):
                     </section>
 
                     <section>
-                        <h4>Wait a moment, there are arguments in that function, How is that?</h4>
-                        <p>Yes, we can pass arguments from the command line, like so:</p>
+                        <h4>¡¡EH!! ¡¡espera!!, hay argumentos en esa función, ¿Cómo es posible?</h4>
+                        <p>Correcto, podemos pasar argumentos desde la línea de comandos asi:</p>
                             <pre><code class="hljs" data-trim contenteditable>
 $ fab archive:downloads,myfile.zip
                             </code></pre>
+                        <p><small>Entiendan que los argumentos se pasan como texto, en el caso de que fueran enteros o de otro tipo tenemos que convertirlos dentro del script.</small></p>
                     </section>
                 </section>
 
                 <section>
                     <section>
                         <h3>env</h3>
-                        <p><small>Its a class that inherits from dict</small></p>
-                        <p><small><b>env</b> will be accessed by fabric to check its configuration</small></p>
-                        <p><small>So there is where you define the enviromental variables and where you configure some specific behaviours of fabric</small></p>
-                        <p><small>There are many <b>env variables</b> and its encouraged to take a look to the <a href="http://docs.fabfile.org/en/1.13/usage/env.html">complete list</a></small></p>
-                        <p><small><b>env</b> also works as storage and access to our specific developing requirements.</small></p>
-                        <p class="fragment"><small>The most important <b>env</b> enviromental variables are:</small></p>
+                        <p><small>Es una clase que hereda de dict</small></p>
+                        <p><small><b>env</b> será leido por fabric para comprobar en cada momento su configuración</small></p>
+                        <p><small>Es por tanto donde se definen las variables de entorno del script y configuras ciertos comportamientos específicos.</small></p>
+                        <p><small>hay muchas <b>env variables</b>, como siempre se recomienda leerse la <a href="http://docs.fabfile.org/en/1.13/usage/env.html">lista completa</a></small></p>
+                        <p><small><b>env</b> además nos sirve para poder guardar y acceder a las variables que nosotros necesitemos específicamente (como en el primer ejemplo).</small></p>
+                        <p class="fragment"><small>las variables de entorno de <b>env</b> mas importantes son:</small></p>
                     </section>
 
                     <section>
                         <h4>user / sudo_user</h4>
                         <ul>
                         <p>user</p>
-                        <p><small>Where you define what user will run the command, fallbacks to the user that run the fabric script.</small></p>
+                        <p><small>Donde defines quien va a ejecutar el comando, si no se define será quien esté ejecutando el script de fabric.</small></p>
                         <div class="fragment">
                         <p>sudo_user</p>
-                        <p><small>As you guessed the name of the sudo username (will be read by the sudo command).</small></p>
+                        <p><small>Obviamente el usuario de sudo cuando necesitemos privilegios de superusuario (y necesita existir para poder ser leido por el comando <b>sudo</b>).</small></p>
                         </div>
                         </ul>
                     </section>
@@ -251,9 +268,9 @@ $ fab archive:downloads,myfile.zip
                         <h4>host / hosts</h4>
                         <ul>
                             <p>host</p>
-                            <p><small>Where the remote command will be run (run command).</small></p>
+                            <p><small>En qué máquinas se va a ejecutar el comando (requerido por tanto por run).</small></p>
                             <div  class="fragment"><p>hosts</p>
-                            <p><small>Its a list of remote computers where the run command will be executed.</small></p></div>
+                            <p><small>Lista de máquinas donde los comandos remotos (con run por ejemplo) se van a ejecutar.</small></p></div>
                         </ul>
                     </section>
 
@@ -261,9 +278,19 @@ $ fab archive:downloads,myfile.zip
                         <h4>password / passwords</h4>
                         <ul>
                             <p>password</p>
-                            <p><small>Where you store the password of the user that will run the command.</small></p>
+                            <p><small>Donde se almacena la clave que se va a ejecutar ciertos comandos.</small></p>
                             <div class="fragment"><p>passwords</p>
-                            <p><small>If each remote computer requires an specific username/password you can make use of this enviromental variable.</small></p></div>
+                            <p><small>Si cada máquina remota requiere de una clave específica se deberá de configurar mediante éste diccionario.</small></p>
+                            </div>
+                            <div class="fragment">
+                            <p><small><b>NUNCA</b> guarden las claves en un fichero ".py", en el caso de que se requiera meter claves es mejor guardarlas en el entorno de la máquina y leerlas desde allí.</small></p>
+                            <pre>
+                                <code class="hljs" data-trim contenteditable>
+import os
+env.password = os.environ['MI_CLAVE']
+                                </code>
+                            </pre>
+                            </div>
                         </ul>
                     </section>
 
@@ -271,21 +298,21 @@ $ fab archive:downloads,myfile.zip
                         <h4>sudo_password / sudo_passwords</h4>
                         <ul>
                             <p>sudo_password</p>
-                            <p><small>If that variable does not exist will fallback to password.</small></p>
+                            <p><small>Si no existe intentará utilizar la misma de <b>password</b>.</small></p>
                             <div class="fragment"><p>sudo_passwords</p>
-                            <p><small>Needed if each of the servers needs specific password and user.</small></p></div>
+                            <p><small>Al igual por si necesitas claves específicas por servidor.</small></p></div>
                         </ul>
                     </section>
 
                     <section>
                         <h4>shell</h4>
                         <ul>
-                            <p><small>To define the shell we want to use defaults to <b>bash</b>.</small></p>
+                            <p><small>para definir el shell que va a ejecutar el comando, por defecto es <b>bash</b>.</small></p>
                         </ul>
                     </section>
 
                     <section data-background="#FFFFB1">
-                        <h4>At some specific point you could preefer to change an env variable inside an specific task</h4>
+                        <h4>En un momento determinado puede necesitar cambiar una variable en un momento determinado o para una tarea determinada, ese caso tenemos <b>settings</b></h4>
                         <p class="fragment"></p>
                             <pre><code class="hljs" data-trim contenteditable>
 from fabric.api import settings, run
@@ -295,16 +322,17 @@ def changing_inside(path):
         return run('ls -la')
                             </code></pre>
                         </p>
-                        <p>That warn_only will override the content of env.warn_only inside the <b>with</b> statement</p>
+                        <p>Por tanto ese comportamiento son afectará lo que ejecutemos dentro del <b>with</b></p>
                     </section>
                 </section>
 
                 <section data-background="#FFFFB1">
                     <section>
-                        <h4>Come on Héctor, show us some code!!!</h4>
+                        <h4>Venga ya Héctor, muestranos algo de código!!!</h4>
+                        <img  class="fragment" style="vertical-align: middle;border:none;box-shadow:none;background:none" src="lib/images/enfado.jpg" alt="why automate" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
                         <div class="fragment">
-                            <h4>Roger! How to manage different configurations:</h4>
-                            <p><small>Usually the different configurations are managed manipulating the env dictionary on run time.</small></p>
+                            <h4>Roger! ¿Cómo manejaríamos varias configuraciones?:</h4>
+                            <p><small>Normalmente las configuraciones se setean en tiempo de ejecución, algunas son globales para todo el módulo, otras son específicas para unos comandos determinados como vimos hace un momento, pero algunas pueden ser dependiendo del servidor al que estemos manejando</small></p>
                             <p><small>eg:</small></p>
                         </div>
                     </section>
@@ -334,7 +362,7 @@ def testing():
                     </section>
 
                     <section>
-                        <p><small>So we can change the env at runtime:</small></p>
+                        <p><small>Por tanto podemos ejecutar los mismos comandos en diferentes servidores con configuraciones específicas:</small></p>
                         <p class="fragment">
                             <pre><code class="hljs" data-trim contenteditable>
 $ fab -f mi_fabfile.py development db_backup
@@ -351,8 +379,8 @@ $ fab -f mi_fabfile.py testing db_backup
 
                 <section>
                     <section>
-                        <h3>How to run fabric</h3>
-                        <p>Fabric will allways look for a <b>fabfile.py</b> file in your current folder, if that doesn't exist you will have to specify what file you want to run specifically.</p>
+                        <h3>¿Cómo se ejecuta <b>fabric</b>?</h3>
+                        <p>Fabric va a buscar un fichero llamado <b>fabfile.py</b> o un módulo llamado <b>fabfile</b> en el directorio actual, o puedes especificar el fichero directamente.</p>
                         <p class="fragment">
                             <pre><code class="hljs" data-trim contenteditable>
 $ fab development db_backup
@@ -362,23 +390,23 @@ $ fab -f mi_fabfile.py development db_backup
                             </code></pre>
                         </p>
                         <p class="fragment">
-                            Usually i like it more the second, but i will soon explain the power of the former
+                            Normalmente me gusta mas definirlo explícitamente, pero depende de cada uno.
                         </p>
                     </section>
 
                     <section>
-                        <h3>How to send arguments or keyword arguments</h3>
-                        <p>Like with regular python you can send arguments and keyword arguments, but using the command line</p>
+                        <h3>¿Cómo enviar argumentos?</h3>
+                        <p>Ya lo explicamos</p>
                         <p class="fragment">
                             <pre><code class="hljs" data-trim contenteditable>
 $ fab big_task:first_arg,second_arg,third=foo,fourth=bar
                             </code></pre>
                         </p>
-                        <p>As you can see only accepts string arguments, you could transform them inside</p>
+                        <p>Y también recuerdo que solo llegan como cadena de texto, debemos en su caso convertirlo después.</p>
                     </section>
 
                     <section>
-                        <p><small>BTW nothing stops you of doing:</small></p>
+                        <p><small>A propósito nada te impide:</small></p>
                         <p class="fragment">
                             <pre><code class="hljs" data-trim contenteditable>
 $ fab -f mi_fabfile.py development db_backup production db_backup
@@ -390,15 +418,15 @@ $ fab -f mi_fabfile.py development db_backup production db_backup
 
                 <section>
                     <section>
-                        <h3>tasks</h3>
-                        <p>From inside the fabfiles you can specify what functions are the tasks and which ones arent</p>
-                        <p>This is something relativelly new to fabric, so for backwards compatibility its not required to mark them, that is all functions are considered tasks, but if you use task inside a file those that are not marked arent considered tasks any more.</p>
-                        <p>You can mark functions using the handy task decorator</p>
+                        <h3>tasks (tareas)</h3>
+                        <p>Dentro del fichero de fabric podemos especificar que funciones son o no tareas.</p>
+                        <p>Ésto es algo relativamente nuevo en fabric, para compatibilidad se permite no definir explicitamente, pero se recomienda su uso, eso si una vez defines al menos una tarea el resto no se considera tarea.</p>
+                        <p>Para ello usarmos un decorador.</p>
                     </section>
 
                     <section data-background="#FFFFB1">
                         <p>
-                            <h4>OMG!, can you show some code without asking for it?</h4>
+                            <h4>¡PERO QUE PESADO!, ¿No puedes enseñar algo de código sin tener que pedirlo?</h4>
                             <pre><code class="hljs" data-trim contenteditable>
 from fabric.decorators import task
 
@@ -415,8 +443,8 @@ def my_bar():
 
                     <section data-background="#FFFFB1">
                         <p>
-                            <h4>Tasks can also be defined as classes that inherit from Task</h4>
-                            <p>IMHO its a bit of overkill, what makes fabric nice is been simple. But guess some people can make good use of it.</p>
+                            <h4>Las tareas también se pueden definir como clases que hereden de <b>Task</b></h4>
+                            <p>En mi opinión, me parece matar moscas a cañonazos, lo interesante de Fabric es que sea simple y práctico, seguramente hay muchos casos de uso para ésto.</p>
                             <pre><code class="hljs" data-trim contenteditable>
 from fabric.api import run
 from fabric.tasks import Task
@@ -434,9 +462,9 @@ instance = MyTask()
 
                 <section>
                     <section>
-                        <h3>Last but not least</h3>
-                        <p>How to make a fabric complete module</p>
-                        <p>you can create an structure like this:</p>
+                        <h3>Y por último</h3>
+                        <p>Como hacer un módulo completo</p>
+                        <p>debes de crear una estructura como ésta:</p>
                     </section>
                     <section>
                         <p><small>
@@ -472,8 +500,20 @@ fabfile/
                 </section>
 
                 <section>
-                    <h3>Thanks!</h3>
-                    <p>The complete slides will be always available at <a href="https://monobot.github.io/fabric_pyday2017/">https://monobot.github.io/fabric_pyday2017/</a></p>
+                        <h3>¡¡Ahora vamos a ver algo de código en vivo!!</h3>
+                        <p><small>Que no se note que tengo una chuletilla (por lo de los nervios y tal)</small></p>
+                </section>
+
+                <section>
+                        <h3>Ejercicio para los créditos</h3>
+                        <p><small>El script debe conectar a un servidor remoto, y guardar el arbol de directorios y ficheros del home ("~/"), en un fichero, el script debe finalmente descargar este fichero a nuestro ordenador local.</small></p>
+                        <p><small>pistas: para el arbol de ficheros y directorios hay un comando de consola llamado "tree", para que la salida del comando se guarde en un fichero determinado puedes poner "tree > myfile.txt".</small></p>
+                        <p><small>Enviarlo por correo a monobot.soft@gmail.com antes de un mes</small></p>
+                </section>
+
+                <section>
+                    <h3>¡Gracias!</h3>
+                    <p>La guia completa la tienen disponible en: <a href="https://monobot.github.io/fabric_pyday2017/">https://monobot.github.io/fabric_pyday2017/</a></p>
                 </section>
 
             </div>
